@@ -27,8 +27,8 @@ void Klondistortion::prepare(){
 
 }
 
-float Klondistortion::getDrive(){   //get drive of plugin
-    return drive;
+/*float Klondistortion::getDrive(){   //get drive of plugin
+return drive;
 }
 
 void Klondistortion::setDrive(float newDrive){    //set drive of plugin
@@ -47,11 +47,12 @@ void Klondistortion::setTone(float newTone){    //set tone of plugin
 }
 
 
-float Klondistortion::getLevel(){
+float Klondistortion::getLevel(){        //get level of plugin
     return level;
 }
 
 
-void Klondistortion::setLevel(float newLevel){
+void Klondistortion::setLevel(float newLevel){   //set level of plugin 
     level = newLevel;
 }
+ */

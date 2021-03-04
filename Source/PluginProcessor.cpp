@@ -156,7 +156,7 @@ void KlonPedalPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
         for(int sample =0; sample < buffer.getNumSamples(); ++sample) {
             auto* channelData = buffer.getWritePointer (channel);
         // ..do something to the data...
-           buffer.getWritePointer(channel)[sample] = gainMultiplier * buffer.getWritePointer(channel)[sample]; 
+           //buffer.getWritePointer(channel)[sample] = gainChange * buffer.getWritePointer(channel)[sample]; 
         }
     }
 }
