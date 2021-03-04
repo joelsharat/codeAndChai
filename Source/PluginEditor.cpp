@@ -59,7 +59,7 @@ void KlonPedalPluginAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawFittedText("Jlon Mentour",100, 10, 50, 20,juce::Justification::centred, 1);
     
     g.setFont(20.f);
-    g.drawFittedText("By JSFX",270, 100, 50, 20,juce::Justification::centred, 1);
+    g.drawFittedText("By JSFX",270, 100, 70, 70,juce::Justification::centred, 1);
     
     
     //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId))
