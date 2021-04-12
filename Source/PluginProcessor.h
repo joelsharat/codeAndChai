@@ -9,7 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-
+#include "Klondistortion.h"
 //==============================================================================
 /**
 */
@@ -55,7 +55,10 @@ public:
 
 private:
     
-    float gainChange = 1.f; 
+    //float gainChange = 1.f;
+    float drive;       //paramaters of the plugin
+    float tone;
+    float level;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KlonPedalPluginAudioProcessor)
 };
