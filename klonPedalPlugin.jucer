@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="UROrUf" name="klonPedalPlugin" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="SwXIbS" name="klonPedalPlugin">
     <GROUP id="{2B2AE247-1042-6CD7-D5B8-44E2DC877EF2}" name="Source">
       <FILE id="Ci0qJr" name="PluginProcessor.cpp" compile="1" resource="0"

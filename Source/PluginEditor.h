@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "Klondistortion.h"
 
 //==============================================================================
 /**
@@ -34,9 +35,9 @@ private:
     // access the processor object that created it.
     KlonPedalPluginAudioProcessor& audioProcessor;
     
-   juce::Slider driveControl;
-   juce::Slider toneControl;
-   juce::Slider levelControl;
+   Slider driveControl;
+   Slider toneControl;
+   Slider levelControl;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KlonPedalPluginAudioProcessorEditor)
 };
