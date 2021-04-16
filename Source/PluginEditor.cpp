@@ -11,38 +11,39 @@
 
 //==============================================================================
 KlonPedalPluginAudioProcessorEditor::KlonPedalPluginAudioProcessorEditor (KlonPedalPluginAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+: AudioProcessorEditor (&p), audioProcessor (p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (300, 150);
     
     //drive control
-    driveControl.addListener(this);
-    driveControl.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    driveControl.setBounds(30, 75, 40, 40);
-    driveControl.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
-    driveControl.setRange(0.01f, 10);
-    //driveControl.setValue();
-    addAndMakeVisible(driveControl);
+    driveControlKnob.addListener(this);
+    driveControlKnob.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    driveControlKnob.setBounds(30, 75, 40, 40);
+    driveControlKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
+    driveControlKnob.setRange(0.01f, 10);
+    addAndMakeVisible(driveControlKnob);
+    driveControlKnob.setValue(audioProcessor.driveValue);
     
     //tone control
-    toneControl.addListener(this);
-    toneControl.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    toneControl.setBounds(130, 75, 40, 40);
-    toneControl.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
-    toneControl.setRange(0.01, 10);
-    //toneControl.setValue();
-    addAndMakeVisible(toneControl);
+    toneControlKnob.addListener(this);
+    toneControlKnob.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    toneControlKnob.setBounds(130, 75, 40, 40);
+    toneControlKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
+    toneControlKnob.setRange(0.01, 10);
+    addAndMakeVisible(toneControlKnob);
+    toneControlKnob.setValue(audioProcessor.toneValue);
     
+  
     //level control
-    levelControl.addListener(this);
-    levelControl.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    levelControl.setBounds(230, 75, 40, 40);
-    levelControl.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
-    levelControl.setRange(0.01, 10);
-    //levelControl.setValue();
-    addAndMakeVisible(levelControl);
+    levelControlKnob.addListener(this);
+    levelControlKnob.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    levelControlKnob.setBounds(230, 75, 40, 40);
+    levelControlKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 20, 25);
+    levelControlKnob.setRange(0.01, 10);
+    levelControlKnob.setValue(audioProcessor.levelValue);
+    addAndMakeVisible(levelControlKnob);
     
 }
 
@@ -57,7 +58,6 @@ void KlonPedalPluginAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll(juce::Colours::orange);
     g.setFont(15.f);
     g.drawFittedText("Jlon Mentour",100, 10, 50, 20,juce::Justification::centred, 1);
-    
     g.setFont(20.f);
     g.drawFittedText("By JSFX",270, 100, 70, 70,juce::Justification::centred, 1);
     
@@ -70,29 +70,28 @@ void KlonPedalPluginAudioProcessorEditor::paint (juce::Graphics& g)
 
 void KlonPedalPluginAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    driveControlKnob.setBounds(30, 75, 40, 40);
+    toneControlKnob.setBounds(130, 75, 40, 40);
+    levelControlKnob.setBounds(230, 75, 40, 40);
 }
 
-void KlonPedalPluginAudioProcessor::driveControlChange(juce::Slider* slider){
-    if(slider == &driveControl){
-        KlonPedalPluginAudioProcessor.driveControl = slider -> getValue();
-        
+void KlonPedalPluginAudioProcessorEditor::sliderValueChanged(Slider *slider){
+    if(slider == &driveControlKnob){
+        audioProcessor.driveValue = driveControlKnob.getValue();
+    }
+    if  (slider == &toneControlKnob){
+         audioProcessor.toneValue = toneControlKnob.getValue();
+    }
+    
+    if(slider == &levelControlKnob) {
+         audioProcessor.levelValue = levelControlKnob.getValue();
+    
     }
 }
 
-void KlonPedalPluginAudioProcessor::toneControlChange(juce::Slider* slider){
-    if(slider == &driveControl){
-        KlonPedalPluginAudioProcessor.toneControl = slider -> getValue();
-        
-    }
-}
 
 
-void KlonPedalPluginAudioProcessor::levelControlChange(juce::Slider* slider){
-    if(slider == &driveControl){
-        KlonPedalPluginAudioProcessor.levelControl = slider -> getValue();
-        
-    }
-}
+
+
+
 

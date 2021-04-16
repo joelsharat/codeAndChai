@@ -93,8 +93,7 @@ void KlonPedalPluginAudioProcessor::changeProgramName (int index, const juce::St
 //==============================================================================
 void KlonPedalPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    klondistortion.setSampleRate(sampleRate);
 }
 
 void KlonPedalPluginAudioProcessor::releaseResources()
@@ -143,6 +142,10 @@ void KlonPedalPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
+    klondistortion.setDriveValue(driveValue);
+    klondistortion.setToneValue(toneValue);
+    klondistortion.setLevelValue(levelValue);
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
@@ -152,11 +155,11 @@ void KlonPedalPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-
+        
         for(int sample =0; sample < buffer.getNumSamples(); ++sample) {
-            auto* channelData = buffer.getWritePointer (channel);
-        // ..do something to the data...
-           //buffer.getWritePointer(channel)[sample] = gainChange * buffer.getWritePointer(channel)[sample]; 
+            float x = buffer.getReadPointer(channel)[sample];
+            float y = klondistortion.processSample(x, channel);
+            buffer.getWritePointer(channel)[sample] = y;
         }
     }
 }

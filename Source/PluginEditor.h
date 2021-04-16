@@ -15,8 +15,7 @@
 //==============================================================================
 /**
 */
-class KlonPedalPluginAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                             public juce::Slider::Listener
+class KlonPedalPluginAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener
 {
 public:
     KlonPedalPluginAudioProcessorEditor (KlonPedalPluginAudioProcessor&);
@@ -25,19 +24,18 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void sliderValueChanged(Slider* slider)override;
+   
     
-    void driveControlChange(juce::Slider* slider)override;
-    void toneControlChange(juce::Slider* slider)override;
-    void levelControlChange(juce::Slider* slider )override;
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     KlonPedalPluginAudioProcessor& audioProcessor;
     
-   Slider driveControl;
-   Slider toneControl;
-   Slider levelControl;
+   Slider driveControlKnob;
+   Slider toneControlKnob;
+   Slider levelControlKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KlonPedalPluginAudioProcessorEditor)
 };
